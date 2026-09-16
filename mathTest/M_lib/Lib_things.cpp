@@ -16,7 +16,7 @@ Task::Task() {
 	case 3:operation_ = '*'; ans_ = _num_1 * _num_2; break;
 	};
 }
-Task::Task(const double min, const double max, const char operation ) {
+Task::Task(const double& min, const double& max, const char& operation ) {
 	if (min > max)
 		throw std::logic_error("min>max");
 	if (operation != '+' && operation != '-' && operation != '*' && operation != '/' && operation != '\0')
@@ -50,4 +50,34 @@ Task::Task(const double min, const double max, const char operation ) {
 		break;
 	case 3:operation_ = '*'; ans_ = _num_1 * _num_2; break;
 	};
+}
+
+MathTest::MathTest(const unsigned int& count) {
+	if (count == 0)
+		throw std::range_error("trying to create Mathtest with 0 length");
+	_tasks = new Task*[count];
+	_count = count;
+	_user_answers = new double[count];
+	_correct_count = -1;
+	for (int i = 0; i < count; i++) {
+		_tasks[i] = new Task();
+	}
+}
+MathTest::MathTest(const unsigned int& count,const double& min, const double& max,const char& op) {
+	if (count == 0)
+		throw std::range_error("trying to create Mathtest with 0 length");
+	_tasks = new Task * [count];
+	_count = count;
+	_user_answers = new double[count];
+	_correct_count = -1;
+	for (int i = 0; i < count; i++) {
+		_tasks[i] = new Task(min,max,op);
+	}
+}
+MathTest::~MathTest() {
+	for (int i = 0; i < _count; i++) {
+		delete _tasks[i];
+	}
+	delete[] _tasks;
+	delete[] _user_answers;
 }
