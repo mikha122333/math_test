@@ -81,3 +81,21 @@ MathTest::~MathTest() {
 	delete[] _tasks;
 	delete[] _user_answers;
 }
+void MathTest::run() {
+	_correct_count = 0;
+	for (int i = 0; i < _count; i++) {
+		std::cout << _tasks[i]->_num_1 << " " << _tasks[i]->operation_ << " " << _tasks[i]->_num_2 << " = ";
+		std::cin >> _user_answers[i];
+		if (_user_answers[i] == _tasks[i]->ans_)
+			_correct_count++;
+		system("cls");
+	}
+}
+void MathTest::show_statistics()const noexcept {
+	if (_correct_count == -1)
+		throw std::logic_error("trying to get statisticks about test, without runnig it first");
+	for (int i = 0; i < _count; i++) {
+		std::cout << i + 1 << ". Question:" << _tasks[i]->_num_1 << " " << _tasks[i]->operation_ << " " << _tasks[i]->_num_2 << " correct ans:" << _tasks[i]->ans_ << " your ans:" << _user_answers[i] << std::endl;
+	}
+	std::cout << "number of correct ans: " << _correct_count<<std::endl;
+}

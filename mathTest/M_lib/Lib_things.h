@@ -1,6 +1,7 @@
 #pragma once
 #include <random>
 #include <stdexcept>
+#include<iostream>
 struct Task {
 	double _num_1;
 	double _num_2;
