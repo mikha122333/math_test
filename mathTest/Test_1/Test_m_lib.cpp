@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "Lib_things.h"
 //#define Test_math_t_with_user
+#define STRUCT
 #define Test_math_t_errors
 #ifdef Test_math_t_with_user
 TEST(test_lib, base_1) {
@@ -32,5 +33,24 @@ TEST(test_lib, err_3) {
 TEST(test_lib, err_4) {
 	MathTest m1(1);
 	EXPECT_ANY_THROW(m1.show_statistics());
+}
+#endif
+#ifdef STRUCT
+TEST(rest_lib, str_exc_1) {
+	EXPECT_ANY_THROW(Task t1(20, -3));
+}
+TEST(rest_lib, str_exc_1) {
+	EXPECT_ANY_THROW(Task t1(-3,20,'a'));
+}
+TEST(rest_lib, str_pr) {
+	Task t1(-10, 10);
+	EXPECT_TRUE(t1._num_1 <= 10);
+	EXPECT_TRUE(t1._num_1 >= -10);
+	EXPECT_TRUE(t1._num_2 <= 10);
+	EXPECT_TRUE(t1._num_2 >= -10);
+}
+TEST(rest_lib, str_pr) {
+	Task t1(-10, 10,'+');
+	EXPECT_TRUE(t1.operation_ == '+');
 }
 #endif
